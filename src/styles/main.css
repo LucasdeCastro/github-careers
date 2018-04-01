@@ -1,0 +1,10 @@
+html,
+body,
+#root {
+  margin: 0px;
+  width: 100%;
+  padding: 0px;
+  height: 100%;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
