@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { IssueListContainer } from "../components";
+
 import Issue from "./Issue";
 import IssueCard from "../components/IssueCard";
 import Accordion from "../components/Accordion";
@@ -12,6 +14,17 @@ class IssuesList extends Component {
     this.props.fetchIssues();
   }
 
+  onScroll = el => {
+    const scroll = el.target;
+    const currentPosition = scroll.offsetHeight + scroll.scrollTop;
+    const aroundEnd =
+      scroll.scrollHeight - scroll.scrollHeight * 0.3 <= currentPosition;
+
+    if (aroundEnd) {
+      console.log("around END");
+    }
+  };
+
   render() {
     const { issues: { data } } = this.props;
     const list = data.map(el => {
@@ -23,7 +36,9 @@ class IssuesList extends Component {
       );
     });
 
-    return <div>{list}</div>;
+    return (
+      <IssueListContainer onScroll={this.onScroll}>{list}</IssueListContainer>
+    );
   }
 }
 

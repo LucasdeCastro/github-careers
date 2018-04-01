@@ -42,7 +42,7 @@ export const CardTitle = styled.label`
 
 export const Card = styled.div`
   display: flex;
-  curso: pointer;
+  cursor: pointer;
   min-height: 80px;
   box-sizing: border-box;
   flex-direction: column;
@@ -51,6 +51,10 @@ export const Card = styled.div`
 
   border: 1px solid #e1e4e8;
   border-bottom: 0px;
+
+  :last-child {
+    border-bottom: 1px solid #e1e4e8;
+  }
 `;
 
 export const LabelRow = styled.div`
@@ -79,4 +83,30 @@ export const MarkdownContainer = styled.div`
   padding: 10px;
   border: 1px solid #e1e4e8;
   border-bottom: none;
+`;
+
+export const IssueListContainer = styled.div`
+  overflow: auto;
+  height: 90%;
+  margin-bottom: 50px;
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #e1e4e8;
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e1e4e9;
+  }
 `;
