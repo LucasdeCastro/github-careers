@@ -1,4 +1,4 @@
-import { MarkdownContainer } from "../components";
+import { MarkdownContainer, ApplyButton } from "../components";
 
 import React from "react";
 import Markdown from "react-markdown";
@@ -31,7 +31,12 @@ export default class Issue extends React.PureComponent {
   };
 
   openEmail = (emails, subject = "") => {
-    window.open(`${EMAIL_URL}&to=${emails.join(",")}&su=${subject}`);
+    const reg = /Android|iPhone|iPad|iPod/i;
+    if (reg.test(navigator.userAgent)) {
+      window.open(`mailto:${emails.join(",")}?&subject=${subject}`);
+    } else {
+      window.open(`${EMAIL_URL}&to=${emails.join(",")}&su=${subject}`);
+    }
   };
 
   sendEmail = () => {
@@ -54,8 +59,8 @@ export default class Issue extends React.PureComponent {
 
     return (
       <MarkdownContainer>
-        <button onClick={this.sendEmail}>Apply</button>
         <Markdown skipHtml={true} source={item.body} />
+        <ApplyButton onClick={this.sendEmail}>Apply</ApplyButton>
       </MarkdownContainer>
     );
   }

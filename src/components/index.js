@@ -19,6 +19,9 @@ export const Title = styled.div`
 
   @media only screen and (max-width: 900px) {
     padding: 15px;
+    color: #ffffff;
+    font-size: 20px;
+    background: #000000;
   }
 `;
 
@@ -80,9 +83,29 @@ export const TitleDate = styled.label`
 `;
 
 export const MarkdownContainer = styled.div`
+  display: flex;
   padding: 10px;
-  border: 1px solid #e1e4e8;
   border-bottom: none;
+  flex-direction: column;
+  border: 1px solid #e1e4e8;
+`;
+
+export const ApplyButton = styled.button`
+  color: #fff;
+  margin: 10px;
+  border: none;
+  width: 130px;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  background: #21b6a8;
+  align-self: flex-start;
+  text-transform: capitalize;
+
+  @media only screen and (max-width: 900px) {
+    width: 90%;
+    align-self: center;
+  }
 `;
 
 export const IssueListContainer = styled.div`

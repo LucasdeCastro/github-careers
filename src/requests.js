@@ -8,3 +8,7 @@ export const instace = axios.create({
 export function getIssues() {
   return instace.get("frontendbr/vagas/issues");
 }
+
+export function getIssuesPage(page) {
+  return instace.get("frontendbr/vagas/issues?page=" + page);
+}

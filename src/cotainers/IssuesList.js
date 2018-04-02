@@ -7,7 +7,7 @@ import IssueCard from "../components/IssueCard";
 import Accordion from "../components/Accordion";
 
 import { connect } from "react-redux";
-import { FETCH_ISSUES } from "../reducers/issues";
+import { FETCH_ISSUES, FETCH_ISSUES_PAGE } from "../reducers/issues";
 
 class IssuesList extends Component {
   componentDidMount() {
@@ -18,11 +18,16 @@ class IssuesList extends Component {
     const scroll = el.target;
     const currentPosition = scroll.offsetHeight + scroll.scrollTop;
     const aroundEnd =
-      scroll.scrollHeight - scroll.scrollHeight * 0.3 <= currentPosition;
+      scroll.scrollHeight - scroll.scrollHeight * 0.1 <= currentPosition;
 
-    if (aroundEnd) {
-      console.log("around END");
-    }
+    if (aroundEnd) this.getNextPage();
+  };
+
+  getNextPage = () => {
+    const { loading, page } = this.props.issues;
+    if (loading) return;
+
+    this.props.fetchNextPage(page + 1);
   };
 
   render() {
@@ -43,7 +48,8 @@ class IssuesList extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  fetchIssues: _ => dispatch({ type: FETCH_ISSUES })
+  fetchIssues: _ => dispatch({ type: FETCH_ISSUES }),
+  fetchNextPage: page => dispatch({ type: FETCH_ISSUES_PAGE, page })
 });
 
 export default connect(({ issues }) => ({ issues }), mapDispatch)(IssuesList);
