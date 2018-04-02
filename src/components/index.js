@@ -15,7 +15,8 @@ export const Title = styled.div`
   color: #24292e;
   font-size: 28px;
   text-transform: uppercase;
-  padding: 15px 0px 15px 0px;
+  padding: 15px 0px 15px 5px;
+  border-bottom: 1px solid #e1e4e8;
 
   @media only screen and (max-width: 900px) {
     padding: 15px;
@@ -53,11 +54,7 @@ export const Card = styled.div`
   padding: 15px 15px 5px 15px;
 
   border: 1px solid #e1e4e8;
-  border-bottom: 0px;
-
-  :last-child {
-    border-bottom: 1px solid #e1e4e8;
-  }
+  border-top: 0px;
 `;
 
 export const LabelRow = styled.div`
