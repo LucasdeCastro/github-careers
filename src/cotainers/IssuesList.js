@@ -12,14 +12,14 @@ import { FETCH_ISSUES, FETCH_ISSUES_PAGE } from "../reducers/issues";
 class IssuesList extends Component {
   componentDidMount() {
     this.props.fetchIssues();
+
+    window.addEventListener("scroll", this.onScroll);
   }
 
   onScroll = el => {
-    const scroll = el.target;
-    const currentPosition = scroll.offsetHeight + scroll.scrollTop;
-    const aroundEnd =
-      scroll.scrollHeight - scroll.scrollHeight * 0.1 <= currentPosition;
-
+    const scroll = el.target.body;
+    const currentPosition = window.innerHeight + window.scrollY;
+    const aroundEnd = scroll.scrollHeight - 240 <= currentPosition;
     if (aroundEnd) this.getNextPage();
   };
 
@@ -41,9 +41,7 @@ class IssuesList extends Component {
       );
     });
 
-    return (
-      <IssueListContainer onScroll={this.onScroll}>{list}</IssueListContainer>
-    );
+    return <IssueListContainer>{list}</IssueListContainer>;
   }
 }
 

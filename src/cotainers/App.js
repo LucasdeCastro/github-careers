@@ -1,4 +1,4 @@
-import { Main, Title } from "../components";
+import { Main, Header, Container, HeaderContainer } from "../components";
 
 import Issue from "./Issue";
 import IssuesList from "./IssuesList";
@@ -8,13 +8,15 @@ import { Route, withRouter, Switch } from "react-router-dom";
 export default class App extends Component {
   render() {
     return (
-      <Main>
-        <div>
-          <Title>github careers</Title>
-        </div>
+      <Container>
+        <Header>
+          <HeaderContainer>github careers</HeaderContainer>
+        </Header>
 
-        <Route path="/" component={IssuesList} />
-      </Main>
+        <Main>
+          <Route path="/" component={IssuesList} />
+        </Main>
+      </Container>
     );
   }
 }
