@@ -31,8 +31,15 @@ class IssuesList extends Component {
   };
 
   render() {
-    const { issues: { data } } = this.props;
+    const { issues: { data }, filterLabel } = this.props;
     const list = data.map(el => {
+      if (
+        filterLabel &&
+        el.labels.length > 0 &&
+        !el.labels.find(e => e.id === filterLabel)
+      )
+        return null;
+
       return (
         <Accordion key={el.number}>
           <IssueCard item={el} />
@@ -50,4 +57,7 @@ const mapDispatch = dispatch => ({
   fetchNextPage: page => dispatch({ type: FETCH_ISSUES_PAGE, page })
 });
 
-export default connect(({ issues }) => ({ issues }), mapDispatch)(IssuesList);
+export default connect(
+  ({ issues, repo: { filterLabel } }) => ({ issues, filterLabel }),
+  mapDispatch
+)(IssuesList);

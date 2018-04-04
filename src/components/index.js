@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Main = styled.div`
   width: 900px;
   height: 100%;
-  margin: 0 auto;
+  margin: 75px auto;
 
   @media only screen and (max-width: 900px) {
     width: 100%;
@@ -35,11 +35,9 @@ export const Header = styled.div`
 
 export const HeaderContainer = styled.div`
   width: 900px;
-  padding: 15px;
-  color: #24292e;
+  display: flex;
   margin: 0 auto;
-  font-size: 20px;
-  text-transform: uppercase;
+  align-items: center;
 
   @media only screen and (max-width: 900px) {
     color: #ffffff;
@@ -134,5 +132,31 @@ export const ApplyButton = styled.button`
 export const IssueListContainer = styled.div`
   height: 90%;
   overflow: auto;
-  margin: 75px 0px 50px 0px;
+`;
+
+export const Button = styled.button`
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 5px;
+  background: #21b6a8;
+  text-transform: capitalize;
+
+  :hover {
+    opacity: 0.8;
+  }
+`;
+
+export const Title = styled.h1`
+  flex: 1;
+  color: #24292e;
+  font-size: 20px;
+  text-transform: uppercase;
+`;
+
+export const Select = styled.select`
+  padding: 5px;
+  border-radius: 2px;
+  border-color: #e1e4e8;
 `;

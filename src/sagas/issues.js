@@ -1,19 +1,12 @@
 import { getIssues, getIssuesPage } from "../requests";
-import { takeLatest, call, put } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import {
-  FETCH_ISSUES,
-  FETCH_ISSUES_PAGE,
   FETCH_ISSUES_FAIL,
   FETCH_ISSUES_SUCCESS,
   FETCH_ISSUES_PAGE_SUCCESS
 } from "../reducers/issues";
 
-export function* watcherSaga() {
-  yield takeLatest(FETCH_ISSUES, fetchIssues);
-  yield takeLatest(FETCH_ISSUES_PAGE, fetchIssuesPage);
-}
-
-function* fetchIssues() {
+export function* fetchIssues() {
   try {
     const response = yield call(getIssues);
     const data = response.data;
@@ -24,7 +17,7 @@ function* fetchIssues() {
   }
 }
 
-function* fetchIssuesPage({ page }) {
+export function* fetchIssuesPage({ page }) {
   try {
     const response = yield call(getIssuesPage, page);
     const data = response.data;

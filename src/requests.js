@@ -12,3 +12,10 @@ export function getIssues() {
 export function getIssuesPage(page) {
   return instace.get("frontendbr/vagas/issues?page=" + page);
 }
+
+export function getRepo() {
+  return instace.get("frontendbr/vagas");
+}
+export function getLabels() {
+  return instace.get("frontendbr/vagas/labels");
+}

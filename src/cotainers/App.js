@@ -1,16 +1,46 @@
-import { Main, Header, Container, HeaderContainer } from "../components";
+import {
+  Box,
+  Main,
+  Title,
+  Header,
+  Container,
+  HeaderContainer
+} from "../components";
+import Select from "../components/Select";
+
+import React, { Component } from "react";
 
 import Issue from "./Issue";
 import IssuesList from "./IssuesList";
-import React, { Component } from "react";
+import { connect } from "react-redux";
+import { FETCH_REPO, SET_LABEL } from "../reducers/repo";
+
 import { Route, withRouter, Switch } from "react-router-dom";
 
-export default class App extends Component {
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchRepo();
+  }
+
+  setLabel = el => {
+    const value = el.target.value || null;
+    this.props.setLabel(value);
+  };
+
   render() {
+    const { repo: { labels } } = this.props;
     return (
       <Container>
         <Header>
-          <HeaderContainer>github careers</HeaderContainer>
+          <HeaderContainer>
+            <Title>github careers</Title>
+            <Select
+              data={labels}
+              getValue={e => e.id}
+              getLabel={e => e.name}
+              onChange={this.setLabel}
+            />
+          </HeaderContainer>
         </Header>
 
         <Main>
@@ -20,3 +50,10 @@ export default class App extends Component {
     );
   }
 }
+
+const mapDispatch = dispatch => ({
+  fetchRepo: _ => dispatch({ type: FETCH_REPO }),
+  setLabel: id => dispatch({ type: SET_LABEL, payload: id })
+});
+
+export default connect(({ repo }) => ({ repo }), mapDispatch)(App);

@@ -26,6 +26,7 @@ const IssueCard = ({ click, item }) => {
     .padStart(2, 0);
 
   const dateStr = `${day}/${month}/${date.getFullYear()}`;
+  const labels = item.labels;
 
   return (
     <Card onClick={_ => click(item.id)}>
@@ -36,7 +37,7 @@ const IssueCard = ({ click, item }) => {
       </TitleContainer>
 
       <LabelRow>
-        {item.labels.map(({ color, name, id }) => (
+        {labels.map(({ color, name, id }) => (
           <GitLabel key={id} color={color}>
             {name}
           </GitLabel>
