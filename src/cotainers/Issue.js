@@ -7,11 +7,12 @@ const EMAIL_URL = "https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1";
 
 export default class Issue extends React.PureComponent {
   getSubject = body => {
-    const str = body.match(/(?=assunto).*$/gim)[0];
+    const str = body.match(/(?=assunto).*$/gim);
     if (str) {
-      return str
+      return str[0]
         .replace("assunto", "")
         .replace(":", "")
+        .split(".")[0]
         .trim();
     }
 

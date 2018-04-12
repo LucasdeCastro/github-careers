@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { IssueListContainer } from "../components";
+import { IssueListContainer, Loading } from "../components";
 
 import Issue from "./Issue";
 import IssueCard from "../components/IssueCard";
@@ -31,7 +31,7 @@ class IssuesList extends Component {
   };
 
   render() {
-    const { issues: { data }, filterLabel } = this.props;
+    const { issues: { data, loading }, filterLabel } = this.props;
     const list = data.map(el => {
       if (
         filterLabel &&
@@ -48,7 +48,12 @@ class IssuesList extends Component {
       );
     });
 
-    return <IssueListContainer>{list}</IssueListContainer>;
+    return (
+    <IssueListContainer>
+      {list}
+      <Loading isLoading={loading} />
+    </IssueListContainer>
+    );
   }
 }
 

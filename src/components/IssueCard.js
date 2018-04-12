@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
 import {
-  Main,
-  Title,
   Card,
   GitLabel,
   LabelRow,
@@ -11,7 +9,6 @@ import {
   TitleContainer
 } from "./index";
 
-import Issue from "../cotainers/Issue";
 
 const IssueCard = ({ click, item }) => {
   const date = new Date(item.created_at);

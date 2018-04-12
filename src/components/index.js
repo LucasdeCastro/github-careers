@@ -1,10 +1,9 @@
-import React from "react";
 import styled from "styled-components";
 
 export const Main = styled.div`
   width: 900px;
   height: 100%;
-  margin: 75px auto;
+  margin: 45px auto;
 
   @media only screen and (max-width: 900px) {
     width: 100%;
@@ -25,23 +24,17 @@ export const Header = styled.div`
   left: 0px;
   width: 100%;
   position: fixed;
-
-  @media only screen and (max-width: 900px) {
-    color: #ffffff;
-    font-size: 20px;
-    background: #000000;
-  }
 `;
 
 export const HeaderContainer = styled.div`
   width: 900px;
+  min-height: 45px;
   display: flex;
   margin: 0 auto;
   align-items: center;
 
   @media only screen and (max-width: 900px) {
-    color: #ffffff;
-    background: #000000;
+    width: 100%;
   }
 `;
 
@@ -130,7 +123,7 @@ export const ApplyButton = styled.button`
 `;
 
 export const IssueListContainer = styled.div`
-  height: 90%;
+  height: 100%;
   overflow: auto;
 `;
 
@@ -148,15 +141,28 @@ export const Button = styled.button`
   }
 `;
 
-export const Title = styled.h1`
+export const Title = styled.div`
   flex: 1;
   color: #24292e;
   font-size: 20px;
+  padding-left: 10px;
   text-transform: uppercase;
 `;
 
 export const Select = styled.select`
   padding: 5px;
+  margin-right: 10px;
   border-radius: 2px;
   border-color: #e1e4e8;
+`;
+
+export const Loading = styled.div`
+  width: 22px;
+  height: 22px;
+  margin: 10px auto;
+  border-radius: 50px;
+  border: 3px solid rgba(210,210,210,.7);
+  border-left-color: #39BF80;
+  display: ${props => (props.isLoading ? "block" : "none")}
+  animation: donut-spin 1.2s linear infinite;
 `;

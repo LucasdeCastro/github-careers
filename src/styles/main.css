@@ -31,3 +31,8 @@ body,
 ::-webkit-scrollbar-thumb:hover {
   background: #e1e4e9;
 }
+
+@keyframes donut-spin {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
