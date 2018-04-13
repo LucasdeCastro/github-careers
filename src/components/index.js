@@ -166,3 +166,7 @@ export const Loading = styled.div`
   display: ${props => (props.isLoading ? "block" : "none")}
   animation: donut-spin 1.2s linear infinite;
 `;
+
+export const Bold = styled.b`
+  font-weight: 500;
+`;

@@ -2,13 +2,13 @@ import React from "react";
 
 import {
   Card,
+  Bold,
   GitLabel,
   LabelRow,
   CardTitle,
   TitleDate,
   TitleContainer
 } from "./index";
-
 
 const IssueCard = ({ click, item }) => {
   const date = new Date(item.created_at);
@@ -24,11 +24,16 @@ const IssueCard = ({ click, item }) => {
 
   const dateStr = `${day}/${month}/${date.getFullYear()}`;
   const labels = item.labels;
+  const title = item.title.split(/\[(.*?)\]/g);
 
   return (
     <Card onClick={_ => click(item.id)}>
       <TitleContainer>
-        <CardTitle>{item.title}</CardTitle>
+        <CardTitle>
+          {title[1] && <Bold>[{title[1]}]</Bold>}
+          {title[2] && title[2]}
+          {title.length === 1 && title[0]}
+        </CardTitle>
 
         <TitleDate>{dateStr}</TitleDate>
       </TitleContainer>
