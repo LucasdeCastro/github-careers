@@ -55,12 +55,16 @@ export default class Issue extends React.PureComponent {
 
   render() {
     const { item } = this.props;
-
+    const body = item.body.split("-->");
     if (!item) return this.props.history.replace({ pathname: "/" });
 
     return (
       <MarkdownContainer>
-        <Markdown skipHtml={true} source={item.body} />
+        <Markdown
+          skipHtml={true}
+          source={body[1] ? body[1] : body[0]}
+          escapeHtml={true}
+        />
         <ApplyButton onClick={this.sendEmail}>Apply</ApplyButton>
       </MarkdownContainer>
     );
