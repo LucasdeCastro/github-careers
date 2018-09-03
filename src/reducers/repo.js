@@ -15,19 +15,21 @@ const initialState = {
 export default function(state = initialState, { type, payload }) {
   switch (type) {
     case SET_LABEL:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         filterLabel: payload ? parseInt(payload) : payload
-      });
+      };
     case FETCH_REPO:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         loading: true,
         error: false,
         errorMessage: ""
-      });
+      };
     case FETCH_REPO_SUCCESS:
-      return Object.assign({}, state, { loading: false }, payload);
+      return { ...state, loading: false, ...payload };
     case FETCH_REPO_FAIL:
-      return Object.assign({}, state, { error: true, errorMessage: payload });
+      return { ...state, error: true, errorMessage: payload };
     default:
       return state;
   }

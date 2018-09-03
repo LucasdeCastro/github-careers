@@ -10,6 +10,8 @@ export const FETCH_ISSUES_PAGE_SUCCESS = "FETCH_ISSUES_PAGE_SUCCESS";
 const initialState = {
   page: 1,
   data: [],
+  filterTitle: "",
+  filterLabel: "",
   filterData: [],
   error: false,
   loading: false,
@@ -39,11 +41,15 @@ export default function(state = initialState, { type, payload }) {
       return Object.assign({}, state, { loading: true });
     case FILTER_TITLE:
       return Object.assign({}, state, {
-        filterData: filterByTitle(payload, state)
+        filterData: filterByTitle(payload, state),
+        filterTitle: payload,
+        filterLabel: ""
       });
     case SET_LABEL:
       return Object.assign({}, state, {
-        filterData: filterByLabel(payload, state)
+        filterData: filterByLabel(payload, state),
+        filterTitle: "",
+        filterLabel: payload
       });
     case FETCH_ISSUES_SUCCESS:
       return Object.assign({}, state, { data: payload.data, loading: false });
@@ -51,7 +57,16 @@ export default function(state = initialState, { type, payload }) {
       return Object.assign({}, state, {
         page: ++state.page,
         loading: false,
-        data: state.data.concat(payload.data)
+        data: state.data.concat(payload.data),
+        filterData: !!state.filterTitle
+          ? state.filterData.concat(
+              filterByTitle(state.filterTitle, { data: payload.data })
+            )
+          : !!state.filterLabel
+            ? state.filterData.concat(
+                filterByLabel(state.filterLabel, { data: payload.data })
+              )
+            : state.filterData
       });
     case FETCH_ISSUES_FAIL:
       return Object.assign({}, state, {

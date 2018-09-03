@@ -58,8 +58,7 @@ class IssuesList extends Component {
 
   render() {
     const {
-      issues: { loading },
-      filterTitle
+      issues: { loading }
     } = this.props;
 
     return (
