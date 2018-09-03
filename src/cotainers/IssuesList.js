@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 
-import { IssueListContainer, Loading } from "../components";
+import { IssueListContainer, Loading, InputSearch } from "../components";
 
 import Issue from "./Issue";
 import IssueCard from "../components/IssueCard";
 import Accordion from "../components/Accordion";
 
 import { connect } from "react-redux";
-import { FETCH_ISSUES, FETCH_ISSUES_PAGE } from "../reducers/issues";
+import {
+  FETCH_ISSUES,
+  FETCH_ISSUES_PAGE,
+  FILTER_TITLE
+} from "../reducers/issues";
 
 class IssuesList extends Component {
   componentDidMount() {
@@ -30,16 +34,19 @@ class IssuesList extends Component {
     this.props.fetchNextPage(page + 1);
   };
 
-  render() {
-    const { issues: { data, loading }, filterLabel } = this.props;
-    const list = data.map(el => {
-      if (
-        filterLabel &&
-        el.labels.length > 0 &&
-        !el.labels.find(e => e.id === filterLabel)
-      )
-        return null;
+  onSearch = el => {
+    const value = el.target.value;
+    this.props.filterTitle(value);
+  };
 
+  renderList() {
+    const {
+      issues: { data, filterData }
+    } = this.props;
+
+    const list = filterData.length ? filterData : data;
+
+    return list.map(el => {
       return (
         <Accordion key={el.number}>
           <IssueCard item={el} />
@@ -47,18 +54,27 @@ class IssuesList extends Component {
         </Accordion>
       );
     });
+  }
+
+  render() {
+    const {
+      issues: { loading },
+      filterTitle
+    } = this.props;
 
     return (
-    <IssueListContainer>
-      {list}
-      <Loading isLoading={loading} />
-    </IssueListContainer>
+      <IssueListContainer>
+        <InputSearch onChange={this.onSearch} placeholder={"Buscar vagas"} />
+        {this.renderList()}
+        <Loading isLoading={loading} />
+      </IssueListContainer>
     );
   }
 }
 
 const mapDispatch = dispatch => ({
   fetchIssues: _ => dispatch({ type: FETCH_ISSUES }),
+  filterTitle: filter => dispatch({ type: FILTER_TITLE, payload: filter }),
   fetchNextPage: page => dispatch({ type: FETCH_ISSUES_PAGE, page })
 });
 

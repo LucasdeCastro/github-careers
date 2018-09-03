@@ -12,10 +12,7 @@ import {
 
 const IssueCard = ({ click, item }) => {
   const date = new Date(item.created_at);
-  const month = date
-    .getMonth()
-    .toString()
-    .padStart(2, 0);
+  const month = (date.getMonth() + 1).toString().padStart(2, 0);
 
   const day = date
     .getDate()
@@ -24,7 +21,7 @@ const IssueCard = ({ click, item }) => {
 
   const dateStr = `${day}/${month}/${date.getFullYear()}`;
   const labels = item.labels;
-  const title = item.title.split(/\[(.*?)\]/g);
+  const title = (item.title || "").split(/\[(.*?)\]/g);
 
   return (
     <Card onClick={_ => click(item.id)}>
@@ -39,7 +36,7 @@ const IssueCard = ({ click, item }) => {
       </TitleContainer>
 
       <LabelRow>
-        {labels.map(({ color, name, id }) => (
+        {(labels || []).map(({ color, name, id }) => (
           <GitLabel key={id} color={color}>
             {name}
           </GitLabel>

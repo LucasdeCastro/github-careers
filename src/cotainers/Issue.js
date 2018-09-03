@@ -24,11 +24,14 @@ export default class Issue extends React.PureComponent {
       /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi
     );
 
-    return emails.reduce((xs, _x) => {
-      const x = _x.trim();
-      if (xs.indexOf(x) < 0) xs.push(x);
-      return xs;
-    }, []);
+    return (
+      emails &&
+      emails.reduce((xs, _x) => {
+        const x = _x.trim();
+        if (xs.indexOf(x) < 0) xs.push(x);
+        return xs;
+      }, [])
+    );
   };
 
   openEmail = (emails, subject = "") => {
@@ -48,7 +51,7 @@ export default class Issue extends React.PureComponent {
     const emails = this.getEmails(item.body);
 
     if (!emails)
-      return alert("Verifique na descrição como aplicar para essea vaga");
+      return alert("Verifique na descrição como aplicar para essa vaga");
 
     this.openEmail(emails, subject);
   };

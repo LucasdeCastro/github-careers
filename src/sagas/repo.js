@@ -1,19 +1,19 @@
+import { REPOS } from "./issues";
 import { getRepo, getLabels } from "../requests";
-import { call, put } from "redux-saga/effects";
-import {
-  FETCH_REPO_FAIL,
-  FETCH_REPO_SUCCESS,
-  FETCH_REPO_PAGE_SUCCESS
-} from "../reducers/repo";
+import { call, put, all } from "redux-saga/effects";
+import { FETCH_REPO_FAIL, FETCH_REPO_SUCCESS } from "../reducers/repo";
 
 export function* fetchRepo() {
   try {
-    const labels = yield call(getLabels);
-    const repo = yield call(getRepo);
+    const labels = yield all(REPOS.map(repo => call(getLabels, repo)));
+    const repo = yield all(REPOS.map(repo => call(getRepo, repo)));
 
     yield put({
       type: FETCH_REPO_SUCCESS,
-      payload: { repo: repo.data, labels: labels.data }
+      payload: {
+        repo: [].concat(...repo.map(({ data }) => data)),
+        labels: [].concat(...labels.map(({ data }) => data))
+      }
     });
   } catch (errorMessage) {
     yield put({ type: FETCH_REPO_FAIL, payload: { errorMessage } });

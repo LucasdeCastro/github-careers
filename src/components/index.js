@@ -15,10 +15,18 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
+export const InputSearch = styled.input`
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 10px 12px;
+  border-radius: 3px;
+  margin: 20px 0px;
+`;
+
 export const Header = styled.div`
-  background: #fafafa;
+  background: #24292e;
+  color: rgba(255, 255, 255, 0.75);
   box-sizing: border-box;
-  border-bottom: 1px solid #e1e4e8;
 
   top: 0px;
   left: 0px;
@@ -65,25 +73,25 @@ export const Card = styled.div`
   flex-direction: column;
   background-color: #fff;
   padding: 15px 15px 5px 15px;
-  border: 1px solid #e1e4e8;
-  border-bottom: 0px;
-
-  :last-child {
-    border-bottom: 1px solid #e1e4e8;
-  }
+  border: 1px solid #d1d5da;
+  margin-top: 5px;
+  border-radius: 2px;
 `;
 
 export const LabelRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   margin: 10px 0px;
 `;
 
-export const GitLabel = styled.a`
-  height: 20px;
+export const GitLabel = styled.div`
+  height: 15px;
   font-size: 12px;
   font-weight: 600;
+  margin-top: 10px;
   margin-right: 5px;
   line-height: 15px;
-  padding: 0.15em 4px;
+  padding: 5px 4px 0.5em 4px;
   border-bottom: 3px solid #${props => props.color};
 `;
 
@@ -93,6 +101,7 @@ export const TitleContainer = styled.div`
 
 export const TitleDate = styled.label`
   color: #ccc;
+  padding-left: 5px;
 `;
 
 export const MarkdownContainer = styled.div`
@@ -101,6 +110,13 @@ export const MarkdownContainer = styled.div`
   border-bottom: none;
   flex-direction: column;
   border: 1px solid #e1e4e8;
+  border-top: 0px;
+  background: #fff;
+  z-index: -1;
+
+  img {
+    width: 100%;
+  }
 `;
 
 export const ApplyButton = styled.button`
@@ -124,7 +140,10 @@ export const ApplyButton = styled.button`
 
 export const IssueListContainer = styled.div`
   height: 100%;
+  display: flex;
+  padding: 10px;
   overflow: auto;
+  flex-direction: column;
 `;
 
 export const Button = styled.button`
@@ -143,8 +162,8 @@ export const Button = styled.button`
 
 export const Title = styled.div`
   flex: 1;
-  color: #24292e;
-  font-size: 20px;
+  color: #fff;
+  font-size: 16px;
   padding-left: 10px;
   text-transform: uppercase;
 `;
@@ -153,7 +172,19 @@ export const Select = styled.select`
   padding: 5px;
   margin-right: 10px;
   border-radius: 2px;
-  border-color: #e1e4e8;
+  color: #fff;
+  border: 0px;
+  background-color: rgba(255, 255, 255, 0.125);
+
+  option {
+    border: 0px;
+  }
+
+  :focus {
+    color: #444;
+    border: 0px;
+    background: #fff;
+  }
 `;
 
 export const Loading = styled.div`
