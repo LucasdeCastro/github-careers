@@ -1,13 +1,19 @@
-import { Main, Title, Header, Container, HeaderContainer } from "../components";
-import Select from "../components/Select";
-
-import React, { Component } from "react";
-
-import IssuesList from "./IssuesList";
 import { connect } from "react-redux";
-import { FETCH_REPO, SET_LABEL } from "../reducers/repo";
-
+import React, { Component } from "react";
 import { Route } from "react-router-dom";
+import { githubLogin } from "../firebase";
+import {
+  Main,
+  Title,
+  Header,
+  Container,
+  HeaderContainer,
+  LoginButton
+} from "../components";
+
+import Select from "../components/Select";
+import IssuesList from "./IssuesList";
+import { FETCH_REPO, SET_LABEL } from "../reducers/repo";
 
 class App extends Component {
   componentDidMount() {
@@ -18,6 +24,10 @@ class App extends Component {
     el.target.blur();
     const value = el.target.value || null;
     this.props.setLabel(value);
+  };
+
+  login = () => {
+    githubLogin();
   };
 
   render() {
@@ -35,6 +45,7 @@ class App extends Component {
               getLabel={e => e.name}
               onChange={this.setLabel}
             />
+            <LoginButton onClick={this.login}>Login</LoginButton>
           </HeaderContainer>
         </Header>
 

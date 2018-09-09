@@ -71,6 +71,7 @@ export default function(state = initialState, { type, payload }) {
     case FETCH_ISSUES_FAIL:
       return Object.assign({}, state, {
         error: true,
+        loading: false,
         errorMessage: payload.message
       });
     default:

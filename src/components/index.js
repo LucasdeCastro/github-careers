@@ -201,3 +201,29 @@ export const Loading = styled.div`
 export const Bold = styled.b`
   font-weight: 500;
 `;
+
+export const Message = styled.div`
+  flex: 1;
+  padding: 13px;
+  background: #eee;
+  color: #444;
+  margin-top: 30px;
+  border-radius: 2px;
+`;
+
+export const LoginButton = styled.button`
+  color: #fff;
+  padding: 3px 15px;
+  font-size: 12px;
+  line-height: 20px;
+  border: 1px solid rgba(27, 31, 35, 0.2);
+  border-radius: 3px;
+  margin: 0px 10px;
+  background: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
+  cursor: pointer;
+  font-weight: 600;
+
+  :hover {
+    opacity: 0.9;
+  }
+`;

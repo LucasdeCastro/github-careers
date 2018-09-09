@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 
-import { IssueListContainer, Loading, InputSearch } from "../components";
+import {
+  IssueListContainer,
+  Loading,
+  InputSearch,
+  Message
+} from "../components";
 
 import Issue from "./Issue";
 import IssueCard from "../components/IssueCard";
@@ -58,8 +63,17 @@ class IssuesList extends Component {
 
   render() {
     const {
-      issues: { loading }
+      issues: { loading, error }
     } = this.props;
+
+    if (error) {
+      return (
+        <Message>
+          Você atingiu o limite de requisições sem esta logado, realize o login
+          para continuar ou aguarde 40 minutos
+        </Message>
+      );
+    }
 
     return (
       <IssueListContainer>
