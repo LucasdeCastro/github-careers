@@ -143,6 +143,7 @@ export const IssueListContainer = styled.div`
   display: flex;
   padding: 10px;
   overflow: auto;
+  word-wrap: break-word;
   flex-direction: column;
 `;
 
