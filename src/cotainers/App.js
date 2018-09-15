@@ -16,6 +16,12 @@ import IssuesList from "./IssuesList";
 import { FETCH_REPO, SET_LABEL } from "../reducers/repo";
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      isLogged: localStorage.getItem("access_token")
+    }
+  }
   componentDidMount() {
     this.props.fetchRepo();
   }
@@ -27,7 +33,11 @@ class App extends Component {
   };
 
   login = () => {
-    githubLogin();
+    githubLogin().then((user) => {
+      const token = user.credential.accessToken;
+      this.setState({ isLogged: token })
+    })
+
   };
 
   render() {
@@ -45,7 +55,7 @@ class App extends Component {
               getLabel={e => e.name}
               onChange={this.setLabel}
             />
-            <LoginButton onClick={this.login}>Login</LoginButton>
+            {!this.state.isLogged && <LoginButton onClick={this.login}>Login</LoginButton>}
           </HeaderContainer>
         </Header>
 
