@@ -33,6 +33,6 @@ export const githubLogin = () => {
     .then(function(result) {
       const token = result.credential.accessToken;
       localStorage.setItem("access_token", token);
-      instace.headers = { ...instace.headers, Authorization: `token ${token}` };
+      return result
     });
 };
