@@ -18,23 +18,35 @@ const initialState = {
   errorMessage: ""
 };
 
-const filterByLabel = (payload, { data }) => {
+const filterByLabel = (payload, { data, filterTitle }) => {
   if (!payload) return [];
 
-  return data.filter(
+  const filtered = data.filter(
     issue =>
       issue.labels.length &&
       issue.labels.find(({ id }) => id === parseInt(payload))
   );
+
+  return filterTitle ? filterByTitle(filterTitle, { data: filtered }) : filtered
 };
 
-const filterByTitle = (payload, { data }) => {
-  return data.filter(issue =>
-    issue.title.toLowerCase().includes(payload.toLowerCase())
-  );
+const filterByTitle = (payload, { data, filterLabel }) => {
+  const filtered = data.filter(issue => issue.title && payload && issue.title.toLowerCase().indexOf(payload.toLowerCase()) >= 0);
+  return filterLabel ? filterByLabel(filterLabel, { data: filtered }) : filtered
 };
 
-export default function(state = initialState, { type, payload }) {
+const nextPage = (state, payload) => {
+  const newData = state.data.concat(payload.data)
+  const filtered = filterByTitle(state.filterTitle, { ...state, data: newData })
+  return Object.assign({}, state, {
+    page: ++state.page,
+    loading: false,
+    data: newData,
+    filterData: filtered
+  });
+}
+
+export default function (state = initialState, { type, payload }) {
   switch (type) {
     case FETCH_ISSUES:
     case FETCH_ISSUES_PAGE:
@@ -42,32 +54,17 @@ export default function(state = initialState, { type, payload }) {
     case FILTER_TITLE:
       return Object.assign({}, state, {
         filterData: filterByTitle(payload, state),
-        filterTitle: payload,
-        filterLabel: ""
+        filterTitle: payload
       });
     case SET_LABEL:
       return Object.assign({}, state, {
         filterData: filterByLabel(payload, state),
-        filterTitle: "",
         filterLabel: payload
       });
     case FETCH_ISSUES_SUCCESS:
       return Object.assign({}, state, { data: payload.data, loading: false });
     case FETCH_ISSUES_PAGE_SUCCESS:
-      return Object.assign({}, state, {
-        page: ++state.page,
-        loading: false,
-        data: state.data.concat(payload.data),
-        filterData: !!state.filterTitle
-          ? state.filterData.concat(
-              filterByTitle(state.filterTitle, { data: payload.data })
-            )
-          : !!state.filterLabel
-            ? state.filterData.concat(
-                filterByLabel(state.filterLabel, { data: payload.data })
-              )
-            : state.filterData
-      });
+      return nextPage(state, payload)
     case FETCH_ISSUES_FAIL:
       return Object.assign({}, state, {
         error: true,
