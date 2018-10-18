@@ -17,7 +17,7 @@ export function* fetchIssues() {
       .sort((a, b) => {
         if (a.created_at < b.created_at) return 1;
         if (a.created_at === b.created_at) return 0;
-        if (a.created_at > b.created_at) return -1;
+        return -1;
       });
     yield put({ type: FETCH_ISSUES_SUCCESS, payload: { data: sorted } });
   } catch (errorMessage) {
@@ -33,7 +33,7 @@ export function* fetchIssuesPage({ page }) {
       .sort((a, b) => {
         if (a.created_at < b.created_at) return 1;
         if (a.created_at === b.created_at) return 0;
-        if (a.created_at > b.created_at) return -1;
+        return -1;
       });
 
     yield put({ type: FETCH_ISSUES_PAGE_SUCCESS, payload: { data: sorted } });

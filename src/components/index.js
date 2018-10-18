@@ -165,6 +165,7 @@ export const Title = styled.div`
   flex: 1;
   color: #fff;
   font-size: 16px;
+  cursor: pointer;
   padding-left: 10px;
   text-transform: uppercase;
 `;
@@ -228,3 +229,7 @@ export const LoginButton = styled.button`
     opacity: 0.9;
   }
 `;
+
+export const IssueComponent = styled.div`
+  margin-top: 30px;
+`

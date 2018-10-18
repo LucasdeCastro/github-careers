@@ -24,7 +24,7 @@ const filterByLabel = (payload, { data, filterTitle }) => {
   const filtered = data.filter(
     issue =>
       issue.labels.length &&
-      issue.labels.find(({ id }) => id === parseInt(payload))
+      issue.labels.find(({ id }) => id === parseInt(payload, 10))
   );
 
   return filterTitle ? filterByTitle(filterTitle, { data: filtered }) : filtered

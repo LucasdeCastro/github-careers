@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const createAxiosInstance = () => {
-  const instace = axios.create({
+  const instance = axios.create({
     baseURL: BASE_URL,
   });
-  instace.interceptors.request.use((config) => {
+  instance.interceptors.request.use((config) => {
     const token = localStorage.getItem("access_token")
 
     if (token !== null) {
@@ -15,23 +15,27 @@ const createAxiosInstance = () => {
   }, function (err) {
     return Promise.reject(err);
   });
-  return instace
+  return instance
 }
 
 export const BASE_URL = "https://api.github.com/repos/";
-export const instace = createAxiosInstance()
+export const instance = createAxiosInstance()
+
+export function getIssue(repo, id) {
+  return instance.get(`${repo}/vagas/issues/${id}`);
+}
 
 export function getIssues(repo) {
-  return instace.get(`${repo}/vagas/issues`);
+  return instance.get(`${repo}/vagas/issues`);
 }
 
 export function getIssuesPage(repo, page) {
-  return instace.get(`${repo}/vagas/issues?page=${page}`);
+  return instance.get(`${repo}/vagas/issues?page=${page}`);
 }
 
 export function getRepo(repo) {
-  return instace.get(`${repo}/vagas`);
+  return instance.get(`${repo}/vagas`);
 }
 export function getLabels(repo) {
-  return instace.get(`${repo}/vagas/labels`);
+  return instance.get(`${repo}/vagas/labels`);
 }

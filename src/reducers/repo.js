@@ -12,12 +12,12 @@ const initialState = {
   filterLabel: null
 };
 
-export default function(state = initialState, { type, payload }) {
+export default function (state = initialState, { type, payload }) {
   switch (type) {
     case SET_LABEL:
       return {
         ...state,
-        filterLabel: payload ? parseInt(payload) : payload
+        filterLabel: payload ? parseInt(payload, 10) : payload
       };
     case FETCH_REPO:
       return {
