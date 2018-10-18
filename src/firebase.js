@@ -1,8 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 
-import { instace } from "./requests";
-
 const config = {
   apiKey: "AIzaSyCpzGCkGcsRpTTCunnXb-iQ8zsldzDSg-c",
   authDomain: "github-careers.firebaseapp.com",
@@ -30,7 +28,7 @@ export const githubLogin = () => {
   return firebase
     .auth()
     .signInWithPopup(provider)
-    .then(function(result) {
+    .then(function (result) {
       const token = result.credential.accessToken;
       localStorage.setItem("access_token", token);
       return result

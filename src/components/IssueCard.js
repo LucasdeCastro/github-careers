@@ -1,5 +1,5 @@
 import React from "react";
-
+import { REPOS } from "../sagas/issues";
 import {
   Card,
   Bold,
@@ -9,6 +9,17 @@ import {
   TitleDate,
   TitleContainer
 } from "./index";
+
+const handleClick = (item, click) => (event) => {
+  if (event.ctrlKey || event.metaKey) {
+    const baseUrl = window.location.href;
+    const repo = REPOS.filter(repokey => item.url.includes(repokey))
+    window.open(`${baseUrl}${repo}/${item.number}`, '_blank');
+    return
+  }
+
+  click(item.id)
+}
 
 const IssueCard = ({ click, item }) => {
   const date = new Date(item.created_at);
@@ -24,7 +35,7 @@ const IssueCard = ({ click, item }) => {
   const title = (item.title || "").split(/\[(.*?)\]/g);
 
   return (
-    <Card onClick={_ => click(item.id)}>
+    <Card onClick={handleClick(item, click)}>
       <TitleContainer>
         <CardTitle>
           {title[1] && <Bold>[{title[1]}]</Bold>}

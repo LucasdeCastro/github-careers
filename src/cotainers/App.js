@@ -10,7 +10,7 @@ import {
   HeaderContainer,
   LoginButton
 } from "../components";
-
+import IssuePage from "./IssuePage"
 import Select from "../components/Select";
 import IssuesList from "./IssuesList";
 import { FETCH_REPO, SET_LABEL } from "../reducers/repo";
@@ -60,7 +60,8 @@ class App extends Component {
         </Header>
 
         <Main>
-          <Route path="/" component={IssuesList} />
+          <Route exact path="/" component={IssuesList} />
+          <Route exact path="/:repo/:id" component={IssuePage} />
         </Main>
       </Container>
     );
