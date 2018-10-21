@@ -27,50 +27,66 @@ const filterByLabel = (payload, { data, filterTitle }) => {
       issue.labels.find(({ id }) => id === parseInt(payload, 10))
   );
 
-  return filterTitle ? filterByTitle(filterTitle, { data: filtered }) : filtered
+  return filterTitle
+    ? filterByTitle(filterTitle, { data: filtered })
+    : filtered;
 };
 
 const filterByTitle = (payload, { data, filterLabel }) => {
-  const filtered = data.filter(issue => issue.title && payload && issue.title.toLowerCase().indexOf(payload.toLowerCase()) >= 0);
-  return filterLabel ? filterByLabel(filterLabel, { data: filtered }) : filtered
+  const filtered = data.filter(
+    issue =>
+      issue.title &&
+      payload &&
+      issue.title.toLowerCase().indexOf(payload.toLowerCase()) >= 0
+  );
+  return filterLabel
+    ? filterByLabel(filterLabel, { data: filtered })
+    : filtered;
 };
 
 const nextPage = (state, payload) => {
-  const newData = state.data.concat(payload.data)
-  const filtered = filterByTitle(state.filterTitle, { ...state, data: newData })
-  return Object.assign({}, state, {
+  const newData = state.data.concat(payload.data);
+  const filtered = filterByTitle(state.filterTitle, {
+    ...state,
+    data: newData
+  });
+  return {
+    ...state,
     page: ++state.page,
     loading: false,
     data: newData,
     filterData: filtered
-  });
-}
+  };
+};
 
-export default function (state = initialState, { type, payload }) {
+export default function(state = initialState, { type, payload }) {
   switch (type) {
     case FETCH_ISSUES:
     case FETCH_ISSUES_PAGE:
-      return Object.assign({}, state, { loading: true });
+      return { ...state, loading: true };
     case FILTER_TITLE:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         filterData: filterByTitle(payload, state),
         filterTitle: payload
-      });
+      };
     case SET_LABEL:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         filterData: filterByLabel(payload, state),
         filterLabel: payload
-      });
+      };
     case FETCH_ISSUES_SUCCESS:
-      return Object.assign({}, state, { data: payload.data, loading: false });
+      return { ...state, data: payload.data, loading: false };
     case FETCH_ISSUES_PAGE_SUCCESS:
-      return nextPage(state, payload)
+      return nextPage(state, payload);
     case FETCH_ISSUES_FAIL:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         error: true,
         loading: false,
-        errorMessage: payload.message
-      });
+        errorMessage: payload.message || payload.errorMessage
+      };
     default:
       return state;
   }

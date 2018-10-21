@@ -1,8 +1,8 @@
-import React from "react"
-import { connect } from "react-redux"
-import Issue from "./Issue"
-import { getIssue } from "../reducers/issue"
-
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Issue from './Issue';
+import { getIssue } from '../reducers/issue';
 import {
   Bold,
   Card,
@@ -10,17 +10,24 @@ import {
   IssueComponent,
   TitleDate,
   CardTitle,
-  TitleContainer,
-} from "../components";
+  TitleContainer
+} from '../components';
 
 class IssuePage extends React.Component {
   componentDidMount() {
-    const { getIssueConnect, match: { params: { id, repo } } } = this.props
-    getIssueConnect(repo, id)
+    const {
+      getIssueConnect,
+      match: {
+        params: { id, repo }
+      }
+    } = this.props;
+    getIssueConnect(repo, id);
   }
 
   render() {
-    const { issue: { loading, data: issue } } = this.props;
+    const {
+      issue: { loading, data: issue }
+    } = this.props;
 
     const date = new Date(issue.created_at);
     const month = (date.getMonth() + 1).toString().padStart(2, 0);
@@ -30,10 +37,9 @@ class IssuePage extends React.Component {
       .padStart(2, 0);
 
     const dateStr = `${day}/${month}/${date.getFullYear()}`;
-    const title = (issue.title || "").split(/\[(.*?)\]/g);
+    const title = (issue.title || '').split(/\[(.*?)\]/g);
 
-    if (loading)
-      return <Loading isLoading={loading} />
+    if (loading) return <Loading isLoading={loading} />;
 
     return (
       <IssueComponent>
@@ -50,8 +56,22 @@ class IssuePage extends React.Component {
         </Card>
         <Issue item={issue} />
       </IssueComponent>
-    )
+    );
   }
 }
 
-export default connect(({ issue }) => ({ issue }), { getIssueConnect: getIssue })(IssuePage)
+IssuePage.propTypes = {
+  issue: PropTypes.object.isRequired,
+  getIssueConnect: PropTypes.func.isRequired,
+  match: PropTypes.objectOf({
+    params: PropTypes.objectOf({
+      id: PropTypes.string.isRequired,
+      repo: PropTypes.string.isRequired
+    })
+  })
+};
+
+export default connect(
+  ({ issue }) => ({ issue }),
+  { getIssueConnect: getIssue }
+)(IssuePage);

@@ -1,5 +1,5 @@
-import React from "react";
-import { Select } from "./index";
+import React from 'react';
+import { Select } from './index';
 
 export default props => {
   const { data, getValue, getLabel, onChange, ...rest } = props;
@@ -8,7 +8,7 @@ export default props => {
 
   return (
     <Select onChange={onChange} {...rest}>
-      <option value={""}>Todos</option>
+      <option value={''}>Todos</option>
       {data.map(e => {
         const value = getValue(e);
         return (

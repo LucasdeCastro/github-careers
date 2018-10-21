@@ -10,20 +10,20 @@ import {
   HeaderContainer,
   LoginButton
 } from "../components";
-import IssuePage from "./IssuePage"
+import IssuePage from "./IssuePage";
 import Select from "../components/Select";
 import IssuesList from "./IssuesList";
 import { FETCH_REPO, SET_LABEL } from "../reducers/repo";
 
 class App extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       isLogged: localStorage.getItem("access_token")
-    }
+    };
   }
   componentDidMount() {
-    this.props.fetchRepo();
+    this.props.fetchRepo(this.props.repos.list);
   }
 
   setLabel = el => {
@@ -33,11 +33,10 @@ class App extends Component {
   };
 
   login = () => {
-    githubLogin().then((user) => {
+    githubLogin().then(user => {
       const token = user.credential.accessToken;
-      this.setState({ isLogged: token })
-    })
-
+      this.setState({ isLogged: token });
+    });
   };
 
   render() {
@@ -55,7 +54,9 @@ class App extends Component {
               getLabel={e => e.name}
               onChange={this.setLabel}
             />
-            {!this.state.isLogged && <LoginButton onClick={this.login}>Login</LoginButton>}
+            {!this.state.isLogged && (
+              <LoginButton onClick={this.login}>Login</LoginButton>
+            )}
           </HeaderContainer>
         </Header>
 
@@ -69,11 +70,11 @@ class App extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  fetchRepo: _ => dispatch({ type: FETCH_REPO }),
+  fetchRepo: repos => dispatch({ type: FETCH_REPO, repos }),
   setLabel: id => dispatch({ type: SET_LABEL, payload: id })
 });
 
 export default connect(
-  ({ repo }) => ({ repo }),
+  ({ repo, repos }) => ({ repo, repos }),
   mapDispatch
 )(App);
