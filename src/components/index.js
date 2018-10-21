@@ -15,6 +15,11 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const InputSearch = styled.input`
   flex: 1;
   border: 1px solid #ccc;
@@ -52,6 +57,7 @@ export const CardTitle = styled.label`
   cursor: pointer;
   font-size: 17px;
   font-weight: 500;
+  line-height: 27px;
   text-decoration: none;
   box-sizing: border-box;
   text-transform: uppercase;
@@ -79,6 +85,7 @@ export const Card = styled.div`
 `;
 
 export const LabelRow = styled.div`
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
   margin: 10px 0px;
@@ -101,6 +108,7 @@ export const TitleContainer = styled.div`
 
 export const TitleDate = styled.label`
   color: #ccc;
+  line-height: 27px;
   padding-left: 5px;
 `;
 
@@ -232,4 +240,31 @@ export const LoginButton = styled.button`
 
 export const IssueComponent = styled.div`
   margin-top: 30px;
-`
+`;
+
+export const TabContainer = styled.div`
+  display: flex;
+`;
+
+export const RepoTab = styled.button`
+  padding: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  color: ${props => (props.filted ? "#AAA" : "#FFF")};
+  background: ${props => (props.filted ? "#DDD" : "#5c90d2")};
+  border-radius: 5px;
+  margin: 0px 10px 20px 0px;
+  border: 1px solid ${props => (props.filted ? "#d1d5da" : "#FFF")};
+`;
+
+export const ShareButton = styled.button`
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 5px;
+  background: #5c90d2;
+  align-self: flex-end;
+  justify-self: flex-end;
+`;
