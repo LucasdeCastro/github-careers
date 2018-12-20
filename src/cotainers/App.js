@@ -12,6 +12,7 @@ import {
 } from "../components";
 import IssuePage from "./IssuePage";
 import Select from "../components/Select";
+import GithubCorner from '../components/GithubCorner';
 import IssuesList from "./IssuesList";
 import { FETCH_REPO, SET_LABEL } from "../reducers/repo";
 
@@ -57,6 +58,7 @@ class App extends Component {
             {!this.state.isLogged && (
               <LoginButton onClick={this.login}>Login</LoginButton>
             )}
+            <GithubCorner />
           </HeaderContainer>
         </Header>
 
