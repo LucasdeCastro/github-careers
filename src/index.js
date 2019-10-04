@@ -5,10 +5,13 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faGhost } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles/main.css";
-import App from "./cotainers";
+import App from "./containers";
 
 ReactGA.initialize("UA-128061632-1");
-ReactGA.pageview(window.location.pathname + window.location.search);
+
+const { pathname, search, href } = window.location;
+
+ReactGA.pageview(`${pathname}/${href.split("#/")[1]}${search}`);
 
 library.add(faGhost);
 
