@@ -41,7 +41,7 @@ export const Header = styled.div`
 
 export const HeaderContainer = styled.div`
   width: 900px;
-  min-height: 45px;
+  min-height: 50px;
   display: flex;
   margin: 0 auto;
   align-items: center;
