@@ -6,11 +6,11 @@ export const getIssue = (repo, id) => ({ type: FETCH_ISSUE, payload: { repo, id 
 
 export default (state = { loading: true, data: {} }, { type, payload }) => {
   switch (type) {
-  case FETCH_ISSUE_SUCCESS:
-    return { ...state, loading: false, data: payload };
-  case FETCH_ISSUE:
-    return { ...state, loading: true };
-  default:
-    return state;
+    case FETCH_ISSUE_SUCCESS:
+      return { ...state, loading: false, data: payload };
+    case FETCH_ISSUE:
+      return { ...state, loading: true };
+    default:
+      return state;
   }
 };

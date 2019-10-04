@@ -1,12 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
+/* eslint-disable */
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default class Animation extends React.Component {
-  state = {
-    key: "key-" + Date.now()
-  };
+  constructor(props) {
+    super(props);
 
-  children = this.props.children;
+    this.state = {
+      key: `key-${Date.now()}`,
+    };
+  }
 
   enter() {
     if (this.refs[this.state.key]) {
@@ -18,11 +21,11 @@ export default class Animation extends React.Component {
 
       node.classList.add(`${name}-enter`);
 
-      setTimeout(_ => {
+      setTimeout((_) => {
         const height = Array.prototype.reduce.call(
           node.children,
           (acc, x) => acc + x.clientHeight,
-          0
+          0,
         );
 
         node.style.height = `${height}px`;
@@ -41,23 +44,21 @@ export default class Animation extends React.Component {
 
       node.classList.add(`${name}-leave`);
 
-      setTimeout(_ => {
+      setTimeout((_) => {
         this.children = null;
-        node.style.height = `0px`;
+        node.style.height = '0px';
         node.classList.add(`${name}-leave-active`);
 
-        setTimeout(_ => this.forceUpdate(), leaveTime);
+        setTimeout((_) => this.forceUpdate(), leaveTime);
       }, 0);
     }
   }
 
   componentWillUpdate(nextProps) {
-    if (!!nextProps.children) {
+    if (nextProps.children) {
       this.children = nextProps.children;
       this.enter();
-    } else {
-      if (this.children) this.leave();
-    }
+    } else if (this.children) this.leave();
   }
 
   render() {

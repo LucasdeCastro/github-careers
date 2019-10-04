@@ -1,5 +1,5 @@
-import { getIssue } from '../requests';
 import { call, put } from 'redux-saga/effects';
+import { getIssue } from '../requests';
 import {
   FETCH_ISSUE_FAIL,
   FETCH_ISSUE_SUCCESS,
@@ -13,3 +13,5 @@ export function* fetchIssue({ payload: { repo, id } }) {
     yield put({ type: FETCH_ISSUE_FAIL, payload: { errorMessage } });
   }
 }
+
+export default { fetchIssue };

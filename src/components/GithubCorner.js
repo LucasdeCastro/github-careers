@@ -5,11 +5,11 @@ const GithubCorner = ({ repo, title }) => {
   const styles = {
     position: 'absolute',
     top: '0',
-    right: '0'
+    right: '0',
   };
 
   return (
-    <a href={repo} title={title} target="_blank">
+    <a href={repo} title={title} rel="noopener noreferrer" target="_blank">
       <svg className="github-corner" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 250 250" fill="#151513" style={styles}>
         <path d="M0 0l115 115h15l12 27 108 108V0z" fill="#fff" />
         <path className="octo-arm" d="M128 109c-15-9-9-19-9-19 3-7 2-11 2-11-1-7 3-2 3-2 4 5 2 11 2 11-3 10 5 15 9 16" />
@@ -26,7 +26,7 @@ GithubCorner.propTypes = {
 
 GithubCorner.defaultProps = {
   repo: 'https://github.com/LucasdeCastro/github-careers',
-  title: 'Github'
+  title: 'Github',
 };
 
 export default GithubCorner;

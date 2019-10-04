@@ -1,43 +1,42 @@
-import { SET_LABEL } from "./repo";
+import { SET_LABEL } from './repo';
 
-export const FETCH_ISSUES = "FETCH_ISSUES";
-export const FILTER_TITLE = "FILTER_TITLE";
-export const FETCH_ISSUES_PAGE = "FETCH_ISSUES_PAGE";
-export const FETCH_ISSUES_FAIL = "FETCH_ISSUES_FAIL";
-export const FETCH_ISSUES_SUCCESS = "FETCH_ISSUES_SUCCESS";
-export const FETCH_ISSUES_PAGE_SUCCESS = "FETCH_ISSUES_PAGE_SUCCESS";
+export const FETCH_ISSUES = 'FETCH_ISSUES';
+export const FILTER_TITLE = 'FILTER_TITLE';
+export const FETCH_ISSUES_PAGE = 'FETCH_ISSUES_PAGE';
+export const FETCH_ISSUES_FAIL = 'FETCH_ISSUES_FAIL';
+export const FETCH_ISSUES_SUCCESS = 'FETCH_ISSUES_SUCCESS';
+export const FETCH_ISSUES_PAGE_SUCCESS = 'FETCH_ISSUES_PAGE_SUCCESS';
 
 const initialState = {
   page: 1,
   data: [],
-  filterTitle: "",
-  filterLabel: "",
+  filterTitle: '',
+  filterLabel: '',
   filterData: [],
   error: false,
   loading: false,
-  errorMessage: ""
+  errorMessage: '',
 };
 
 const filterByLabel = (payload, { data, filterTitle }) => {
   if (!payload) return [];
 
   const filtered = data.filter(
-    issue =>
-      issue.labels.length &&
-      issue.labels.find(({ id }) => id === parseInt(payload, 10))
+    (issue) => issue.labels.length
+      && issue.labels.find(({ id }) => id === parseInt(payload, 10)),
   );
 
   return filterTitle
+    // eslint-disable-next-line
     ? filterByTitle(filterTitle, { data: filtered })
     : filtered;
 };
 
 const filterByTitle = (payload, { data, filterLabel }) => {
   const filtered = data.filter(
-    issue =>
-      issue.title &&
-      payload &&
-      issue.title.toLowerCase().indexOf(payload.toLowerCase()) >= 0
+    (issue) => issue.title
+      && payload
+      && issue.title.toLowerCase().indexOf(payload.toLowerCase()) >= 0,
   );
   return filterLabel
     ? filterByLabel(filterLabel, { data: filtered })
@@ -48,18 +47,18 @@ const nextPage = (state, payload) => {
   const newData = state.data.concat(payload.data);
   const filtered = filterByTitle(state.filterTitle, {
     ...state,
-    data: newData
+    data: newData,
   });
   return {
     ...state,
-    page: ++state.page,
+    page: state.page + 1,
     loading: false,
     data: newData,
-    filterData: filtered
+    filterData: filtered,
   };
 };
 
-export default function(state = initialState, { type, payload }) {
+export default function (state = initialState, { type, payload }) {
   switch (type) {
     case FETCH_ISSUES:
     case FETCH_ISSUES_PAGE:
@@ -68,13 +67,13 @@ export default function(state = initialState, { type, payload }) {
       return {
         ...state,
         filterData: filterByTitle(payload, state),
-        filterTitle: payload
+        filterTitle: payload,
       };
     case SET_LABEL:
       return {
         ...state,
         filterData: filterByLabel(payload, state),
-        filterLabel: payload
+        filterLabel: payload,
       };
     case FETCH_ISSUES_SUCCESS:
       return { ...state, data: payload.data, loading: false };
@@ -85,7 +84,7 @@ export default function(state = initialState, { type, payload }) {
         ...state,
         error: true,
         loading: false,
-        errorMessage: payload.message || payload.errorMessage
+        errorMessage: payload.message || payload.errorMessage,
       };
     default:
       return state;

@@ -9,28 +9,28 @@ const initialState = {
   error: false,
   loading: false,
   errorMessage: '',
-  filterLabel: null
+  filterLabel: null,
 };
 
 export default function (state = initialState, { type, payload }) {
   switch (type) {
-  case SET_LABEL:
-    return {
-      ...state,
-      filterLabel: payload ? parseInt(payload, 10) : payload
-    };
-  case FETCH_REPO:
-    return {
-      ...state,
-      loading: true,
-      error: false,
-      errorMessage: ''
-    };
-  case FETCH_REPO_SUCCESS:
-    return { ...state, loading: false, ...payload };
-  case FETCH_REPO_FAIL:
-    return { ...state, error: true, errorMessage: payload };
-  default:
-    return state;
+    case SET_LABEL:
+      return {
+        ...state,
+        filterLabel: payload ? parseInt(payload, 10) : payload,
+      };
+    case FETCH_REPO:
+      return {
+        ...state,
+        loading: true,
+        error: false,
+        errorMessage: '',
+      };
+    case FETCH_REPO_SUCCESS:
+      return { ...state, loading: false, ...payload };
+    case FETCH_REPO_FAIL:
+      return { ...state, error: true, errorMessage: payload };
+    default:
+      return state;
   }
 }
