@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Issue from './Issue';
 import { getIssue } from '../reducers/issue';
 import {
@@ -10,7 +9,7 @@ import {
   IssueComponent,
   TitleDate,
   CardTitle,
-  TitleContainer
+  TitleContainer,
 } from '../components';
 
 class IssuePage extends React.Component {
@@ -18,15 +17,15 @@ class IssuePage extends React.Component {
     const {
       getIssueConnect,
       match: {
-        params: { id, repo }
-      }
+        params: { id, repo },
+      },
     } = this.props;
     getIssueConnect(repo, id);
   }
 
   render() {
     const {
-      issue: { loading, data: issue }
+      issue: { loading, data: issue },
     } = this.props;
 
     const date = new Date(issue.created_at);
@@ -46,7 +45,13 @@ class IssuePage extends React.Component {
         <Card>
           <TitleContainer>
             <CardTitle>
-              {title[1] && <Bold>[{title[1]}]</Bold>}
+              {title[1] && (
+              <Bold>
+[
+                {title[1]}
+]
+              </Bold>
+              )}
               {title[2] && title[2]}
               {title.length === 1 && title[0]}
             </CardTitle>
@@ -60,18 +65,7 @@ class IssuePage extends React.Component {
   }
 }
 
-IssuePage.propTypes = {
-  issue: PropTypes.object.isRequired,
-  getIssueConnect: PropTypes.func.isRequired,
-  match: PropTypes.objectOf({
-    params: PropTypes.objectOf({
-      id: PropTypes.string.isRequired,
-      repo: PropTypes.string.isRequired
-    })
-  })
-};
-
 export default connect(
   ({ issue }) => ({ issue }),
-  { getIssueConnect: getIssue }
+  { getIssueConnect: getIssue },
 )(IssuePage);

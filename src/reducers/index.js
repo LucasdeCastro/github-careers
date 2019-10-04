@@ -8,5 +8,5 @@ export default combineReducers({
   repo,
   repos,
   issue,
-  issues
+  issues,
 });

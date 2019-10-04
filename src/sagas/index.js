@@ -13,3 +13,5 @@ export function* watcherSaga() {
   yield takeLatest(FETCH_ISSUES, fetchIssues);
   yield takeLatest(FETCH_ISSUES_PAGE, fetchIssuesPage);
 }
+
+export default { watcherSaga };

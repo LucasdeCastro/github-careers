@@ -1,18 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import App from './App';
-import store from '../store';
 import { Provider } from 'react-redux';
 import { HashRouter as Router } from 'react-router-dom';
+import App from './App';
+import store from '../store';
 
-export default class extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <App />
-        </Router>
-      </Provider>
-    );
-  }
-}
+export default () => (
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
+);

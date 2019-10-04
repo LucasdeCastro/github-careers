@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-import "../styles/accordion.css";
-import Animation from "./Animation";
+import '../styles/accordion.css';
+import Animation from './Animation';
 
-export default class Accordion extends React.Component {
-  state = { show: false };
+const Accordion = ({ children, id }) => {
+  const [show, toggle] = useState(false);
+  const [header, body] = children;
 
-  toggle = () => this.setState({ show: !this.state.show });
+  return (
+    <div key={id}>
+      {React.cloneElement(header, { click: toggle })}
+      <Animation name="accordion" leaveTime={500}>
+        {show && body}
+      </Animation>
+    </div>
+  );
+};
 
-  render() {
-    const [header, body] = this.props.children;
+Accordion.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.func).isRequired,
+  id: PropTypes.number.isRequired,
+};
 
-    return (
-      <div key={this.props.id}>
-        {React.cloneElement(header, { click: this.toggle })}
-        <Animation name="accordion" leaveTime={500}>
-          {this.state.show && body}
-        </Animation>
-      </div>
-    );
-  }
-}
+export default Accordion;

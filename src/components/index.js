@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Main = styled.div`
   width: 900px;
@@ -99,7 +99,7 @@ export const GitLabel = styled.div`
   margin-right: 5px;
   line-height: 15px;
   padding: 5px 4px 0.5em 4px;
-  border-bottom: 3px solid #${props => props.color};
+  border-bottom: 3px solid #${(props) => props.color};
 `;
 
 export const TitleContainer = styled.div`
@@ -204,7 +204,7 @@ export const Loading = styled.div`
   border-radius: 50px;
   border: 3px solid rgba(210,210,210,.7);
   border-left-color: #39BF80;
-  display: ${props => (props.isLoading ? "block" : "none")}
+  display: ${(props) => (props.isLoading ? 'block' : 'none')}
   animation: donut-spin 1.2s linear infinite;
 `;
 
@@ -250,11 +250,11 @@ export const RepoTab = styled.button`
   padding: 10px;
   font-size: 13px;
   cursor: pointer;
-  color: ${props => (props.filted ? "#AAA" : "#FFF")};
-  background: ${props => (props.filted ? "#DDD" : "#5c90d2")};
+  color: ${(props) => (props.filted ? '#AAA' : '#FFF')};
+  background: ${(props) => (props.filted ? '#DDD' : '#5c90d2')};
   border-radius: 5px;
   margin: 0px 10px 20px 0px;
-  border: 1px solid ${props => (props.filted ? "#d1d5da" : "#FFF")};
+  border: 1px solid ${(props) => (props.filted ? '#d1d5da' : '#FFF')};
 `;
 
 export const ShareButton = styled.button`
