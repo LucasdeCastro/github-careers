@@ -1,8 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-
 import {
   Row,
   Card,
@@ -11,7 +8,6 @@ import {
   LabelRow,
   CardTitle,
   TitleDate,
-  ShareButton,
   TitleContainer,
 } from './index';
 
@@ -27,10 +23,12 @@ const handleClick = (item, repos, click) => (event) => {
     return;
   }
 
-  click(item.id);
+  click(item, repos);
 };
 
-const IssueCard = ({ click, repos, item }) => {
+const IssueCard = ({
+  click, repos, item, selected,
+}) => {
   const { labels, title, created_at: createdAt } = item;
   const date = new Date(createdAt);
   const month = (date.getMonth() + 1).toString().padStart(2, 0);
@@ -44,34 +42,36 @@ const IssueCard = ({ click, repos, item }) => {
   const titleSplited = (title || '').split(/\[(.*?)\]/g);
 
   return (
-    <Card>
+    <Card selected={(selected || {}).id === item.id}>
       <TitleContainer onClick={handleClick(item, repos, click)}>
         <CardTitle>
-          {titleSplited[1] && (
-          <Bold>
-[
-            {titleSplited[1]}
-]
-          </Bold>
-          )}
-          {titleSplited[2] && titleSplited[2]}
+
+          {titleSplited.length <= 3 ? (
+            <>
+              {titleSplited[2] && titleSplited[2]}
+              {titleSplited[1] && (
+              <Row>
+                <Bold style={{ fontSize: 11, flex: 1 }}>
+                  {`[${titleSplited[1]}]`}
+                </Bold>
+                <TitleDate style={{ flex: 1, textAlign: 'right' }}>{dateStr}</TitleDate>
+              </Row>
+              )}
+            </>
+          ) : title}
+
           {titleSplited.length === 1 && titleSplited[0]}
         </CardTitle>
-        <TitleDate>{dateStr}</TitleDate>
       </TitleContainer>
 
       <Row>
         <LabelRow>
-          {(labels || []).map(({ color, name, id }) => (
+          {(labels || []).slice(0, 3).map(({ color, name, id }) => (
             <GitLabel key={id} color={color}>
               {name}
             </GitLabel>
           ))}
         </LabelRow>
-
-        <ShareButton onClick={openJobPage(item, repos)}>
-          <FontAwesomeIcon icon={faExternalLinkAlt} />
-        </ShareButton>
       </Row>
     </Card>
   );
@@ -84,6 +84,7 @@ IssueCard.propTypes = {
     created_at: PropTypes.string.isRequired,
     labels: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+  selected: PropTypes.number.isRequired,
   repos: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
