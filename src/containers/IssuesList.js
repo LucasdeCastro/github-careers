@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
+  Row,
   RepoTab,
   Message,
   Loading,
   InputSearch,
   TabContainer,
+  ScrollContainer,
   IssueListContainer,
 } from '../components';
+
 import Issue from './Issue';
 import IssueCard from '../components/IssueCard';
-import Accordion from '../components/Accordion';
 
 import {
   FETCH_ISSUES,
@@ -20,19 +22,31 @@ import {
 import { filterRepo, removeFilter } from '../reducers/repos';
 
 class IssuesList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { selectedItem: null };
+  }
+
   componentDidMount() {
     const {
       fetchIssues,
       repos: { list, filter },
     } = this.props;
     fetchIssues(list.filter((repo) => !filter.includes(repo)));
+  }
 
-    window.addEventListener('scroll', this.onScroll);
+  componentDidUpdate() {
+    const { selectedItem } = this.state;
+    const { issues: { filterData } } = this.props;
+    if (!selectedItem && filterData.length) {
+      setTimeout(() => this.setState({ selectedItem: filterData[0] }), 0);
+    }
   }
 
   onScroll = (el) => {
-    const scroll = el.target.body;
-    const currentPosition = window.innerHeight + window.scrollY;
+    const scroll = el.target;
+    const currentPosition = scroll.clientHeight + scroll.scrollTop;
     const aroundEnd = scroll.scrollHeight - 240 <= currentPosition;
     if (aroundEnd) this.getNextPage();
   };
@@ -78,20 +92,20 @@ class IssuesList extends Component {
     }
   };
 
+  selectItem = (selectedItem) => {
+    this.setState({ selectedItem });
+  }
 
   renderList() {
     const {
       issues: { data, filterData },
       repos,
     } = this.props;
-
+    const { selectedItem = {} } = this.state;
     const list = filterData.length ? filterData : data;
 
     return list.map((el) => (
-      <Accordion key={el.number}>
-        <IssueCard item={el} repos={repos.list} />
-        <Issue item={el} />
-      </Accordion>
+      <IssueCard selected={selectedItem} item={el} repos={repos.list} click={this.selectItem} />
     ));
   }
 
@@ -99,8 +113,9 @@ class IssuesList extends Component {
     const {
       repos: { list, filter },
       issues: { loading, error },
+      history,
     } = this.props;
-
+    const { selectedItem } = this.state;
     if (error) {
       return (
         <Message>
@@ -111,7 +126,7 @@ class IssuesList extends Component {
     }
 
     return (
-      <IssueListContainer>
+      <IssueListContainer onScroll={this.onScroll}>
         <InputSearch onChange={this.onSearch} placeholder="Buscar vagas" />
         <TabContainer>
           {list.map((repo) => (
@@ -124,8 +139,16 @@ class IssuesList extends Component {
             </RepoTab>
           ))}
         </TabContainer>
-        {this.renderList()}
-        <Loading isLoading={loading} />
+        <Row>
+          <ScrollContainer style={{ width: 400 }}>
+            {this.renderList()}
+            <Loading isLoading={loading} />
+
+          </ScrollContainer>
+          <ScrollContainer style={{ width: 800 }}>
+            {selectedItem && <Issue item={selectedItem} history={history} />}
+          </ScrollContainer>
+        </Row>
       </IssueListContainer>
     );
   }

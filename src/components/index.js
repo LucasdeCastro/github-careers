@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const Main = styled.div`
-  width: 900px;
+  width: 1200px;
   height: 100%;
   margin: 45px auto;
 
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 1200px) {
     width: 100%;
   }
 `;
@@ -40,30 +40,30 @@ export const Header = styled.div`
 `;
 
 export const HeaderContainer = styled.div`
-  width: 900px;
+  width: 1200px;
   min-height: 50px;
   display: flex;
   margin: 0 auto;
   align-items: center;
 
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 1200px) {
     width: 100%;
   }
 `;
 
 export const CardTitle = styled.label`
   flex: 1;
-  color: #444;
+  color: #585858;
   cursor: pointer;
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
   line-height: 27px;
   text-decoration: none;
   box-sizing: border-box;
   text-transform: uppercase;
 
   :hover {
-    color: #0366d6;
+    color: #3CA2E0;
   }
 
   @media only screen and (max-width: 900px) {
@@ -79,26 +79,25 @@ export const Card = styled.div`
   flex-direction: column;
   background-color: #fff;
   padding: 15px 15px 5px 15px;
-  border: 1px solid #d1d5da;
-  margin-top: 5px;
-  border-radius: 2px;
+  border-bottom: 1px solid #d1d5da;
+  
+   ${(props) => (props.selected ? 'border: 2px solid #3CA2E0' : '')}
+   ${(props) => (props.selected ? 'background: #f1f2f2' : '')}
 `;
 
 export const LabelRow = styled.div`
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  margin: 10px 0px;
+  margin: 5px 0px 10px 0px;
 `;
 
 export const GitLabel = styled.div`
   height: 15px;
   font-size: 12px;
   font-weight: 600;
-  margin-top: 10px;
   margin-right: 5px;
   line-height: 15px;
-  padding: 5px 4px 0.5em 4px;
   border-bottom: 3px solid #${(props) => props.color};
 `;
 
@@ -121,15 +120,32 @@ export const MarkdownContainer = styled.div`
   border-top: 0px;
   background: #fff;
   z-index: -1;
+  color: #585858;
 
   img {
     width: 100%;
   }
 `;
 
+export const MardkdownTitle = styled.div`
+  font-weight: 600;
+  padding: 10px;
+  border-bottom: 1px solid #d1d5da;
+
+  position: absolute;
+  background: #FFF;
+  width: 750px;
+  margin: -10px;
+
+  h2 {
+    margin-bottom: 5px;
+    font-size: 22px;
+  }
+`;
+
 export const ApplyButton = styled.button`
   color: #fff;
-  margin: 10px;
+  margin: 10px 0px;
   border: none;
   width: 130px;
   padding: 10px;
@@ -267,4 +283,11 @@ export const ShareButton = styled.button`
   background: #5c90d2;
   align-self: flex-end;
   justify-self: flex-end;
+`;
+
+export const ScrollContainer = styled.div`
+  overflow-y: scroll;
+  background: #FFF;
+  height: calc(100vh - 200px);
+  border: 1px solid #d1d5da;
 `;

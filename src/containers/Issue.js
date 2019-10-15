@@ -1,7 +1,7 @@
 import React from 'react';
 import Markdown from 'react-markdown';
 import PropTypes from 'prop-types';
-import { MarkdownContainer, ApplyButton } from '../components';
+import { MarkdownContainer, ApplyButton, MardkdownTitle } from '../components';
 
 const EMAIL_URL = 'https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1';
 
@@ -59,15 +59,19 @@ class Issue extends React.PureComponent {
     const { item, history } = this.props;
     const body = item.body.split('-->');
     if (!item) return history.replace({ pathname: '/' });
-
     return (
       <MarkdownContainer>
-        <Markdown
-          skipHtml
-          source={body[1] ? body[1] : body[0]}
-          escapeHtml
-        />
-        <ApplyButton onClick={this.sendEmail}>Apply</ApplyButton>
+        <MardkdownTitle>
+          <h2>{item.title}</h2>
+          <ApplyButton onClick={this.sendEmail}>Apply</ApplyButton>
+        </MardkdownTitle>
+        <div style={{ marginTop: 120 }}>
+          <Markdown
+            skipHtml
+            source={body[1] ? body[1] : body[0]}
+            escapeHtml
+          />
+        </div>
       </MarkdownContainer>
     );
   }
