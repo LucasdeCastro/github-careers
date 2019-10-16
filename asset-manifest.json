@@ -1,6 +1,21 @@
 {
-  "main.css": "static/css/main.44438905.css",
-  "main.css.map": "static/css/main.44438905.css.map",
-  "main.js": "static/js/main.c6d8c4a4.js",
-  "main.js.map": "static/js/main.c6d8c4a4.js.map"
+  "files": {
+    "main.css": "/github-careers/static/css/main.2800222a.chunk.css",
+    "main.js": "/github-careers/static/js/main.7c90900c.chunk.js",
+    "main.js.map": "/github-careers/static/js/main.7c90900c.chunk.js.map",
+    "runtime-main.js": "/github-careers/static/js/runtime-main.2c5424a9.js",
+    "runtime-main.js.map": "/github-careers/static/js/runtime-main.2c5424a9.js.map",
+    "static/js/2.792bacdf.chunk.js": "/github-careers/static/js/2.792bacdf.chunk.js",
+    "static/js/2.792bacdf.chunk.js.map": "/github-careers/static/js/2.792bacdf.chunk.js.map",
+    "index.html": "/github-careers/index.html",
+    "precache-manifest.327ae2559257fbce83638459b07e05c1.js": "/github-careers/precache-manifest.327ae2559257fbce83638459b07e05c1.js",
+    "service-worker.js": "/github-careers/service-worker.js",
+    "static/css/main.2800222a.chunk.css.map": "/github-careers/static/css/main.2800222a.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2c5424a9.js",
+    "static/js/2.792bacdf.chunk.js",
+    "static/css/main.2800222a.chunk.css",
+    "static/js/main.7c90900c.chunk.js"
+  ]
 }
