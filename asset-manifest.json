@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.css": "/github-careers/static/css/main.2800222a.chunk.css",
-    "main.js": "/github-careers/static/js/main.7c90900c.chunk.js",
-    "main.js.map": "/github-careers/static/js/main.7c90900c.chunk.js.map",
+    "main.css": "/github-careers/static/css/main.8263e4ea.chunk.css",
+    "main.js": "/github-careers/static/js/main.c0cb6a66.chunk.js",
+    "main.js.map": "/github-careers/static/js/main.c0cb6a66.chunk.js.map",
     "runtime-main.js": "/github-careers/static/js/runtime-main.2c5424a9.js",
     "runtime-main.js.map": "/github-careers/static/js/runtime-main.2c5424a9.js.map",
-    "static/js/2.792bacdf.chunk.js": "/github-careers/static/js/2.792bacdf.chunk.js",
-    "static/js/2.792bacdf.chunk.js.map": "/github-careers/static/js/2.792bacdf.chunk.js.map",
+    "static/js/2.7a63ab0a.chunk.js": "/github-careers/static/js/2.7a63ab0a.chunk.js",
+    "static/js/2.7a63ab0a.chunk.js.map": "/github-careers/static/js/2.7a63ab0a.chunk.js.map",
     "index.html": "/github-careers/index.html",
-    "precache-manifest.327ae2559257fbce83638459b07e05c1.js": "/github-careers/precache-manifest.327ae2559257fbce83638459b07e05c1.js",
+    "precache-manifest.820c28019742d42cb6e21ba7f10e5828.js": "/github-careers/precache-manifest.820c28019742d42cb6e21ba7f10e5828.js",
     "service-worker.js": "/github-careers/service-worker.js",
-    "static/css/main.2800222a.chunk.css.map": "/github-careers/static/css/main.2800222a.chunk.css.map"
+    "static/css/main.8263e4ea.chunk.css.map": "/github-careers/static/css/main.8263e4ea.chunk.css.map",
+    "static/media/luffy.jpg": "/github-careers/static/media/luffy.63e42c31.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.2c5424a9.js",
-    "static/js/2.792bacdf.chunk.js",
-    "static/css/main.2800222a.chunk.css",
-    "static/js/main.7c90900c.chunk.js"
+    "static/js/2.7a63ab0a.chunk.js",
+    "static/css/main.8263e4ea.chunk.css",
+    "static/js/main.c0cb6a66.chunk.js"
   ]
 }
