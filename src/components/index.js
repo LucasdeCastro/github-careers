@@ -56,7 +56,7 @@ export const CardTitle = styled.label`
   color: #585858;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 27px;
   text-decoration: none;
   box-sizing: border-box;
@@ -120,26 +120,32 @@ export const MarkdownContainer = styled.div`
   border-top: 0px;
   background: #fff;
   z-index: -1;
-  color: #585858;
+  color: #404040;
 
   img {
     width: 100%;
   }
 `;
 
-export const MardkdownTitle = styled.div`
+export const MarkdownTitle = styled.div`
+  color: #333;
   font-weight: 600;
   padding: 10px;
   border-bottom: 1px solid #d1d5da;
-
-  position: absolute;
   background: #FFF;
-  width: 750px;
   margin: -10px;
 
+  ${({ noFixed }) => (!noFixed ? 'position: absolute;' : '')}
+  ${({ noFixed }) => (noFixed ? 'border-top: 1px solid #d1d5da;' : '')}
+  ${({ noFixed }) => (noFixed ? 'width: 100%' : 'width: 750px;')}
+
   h2 {
-    margin-bottom: 5px;
-    font-size: 22px;
+    margin: 0px;
+    flex: 1 1 0%;
+    padding: 10px;
+    display: flex;
+    font-size: 20px;
+    align-items: center;
   }
 `;
 
@@ -147,19 +153,32 @@ export const ApplyButton = styled.button`
   color: #fff;
   margin: 10px 0px;
   border: none;
-  width: 130px;
-  padding: 10px;
+  width: 200px;
+  height: 40px;
+  padding: 0 16px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 2px;
   text-align: center;
-  background: #21b6a8;
+  background: #1861bf;
   align-self: flex-start;
-  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 15px;
 
   @media only screen and (max-width: 900px) {
     width: 90%;
     align-self: center;
   }
+`;
+
+export const ButtonAlt = styled.button`
+  border: 1px solid #1861bf;
+  color: #1861bf;
+
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 2px;
 `;
 
 export const IssueListContainer = styled.div`
@@ -177,7 +196,7 @@ export const Button = styled.button`
   cursor: pointer;
   padding: 6px 12px;
   border-radius: 5px;
-  background: #21b6a8;
+  background: #1861bf;
   text-transform: capitalize;
 
   :hover {
@@ -288,6 +307,20 @@ export const ShareButton = styled.button`
 export const ScrollContainer = styled.div`
   overflow-y: scroll;
   background: #FFF;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 215px);
   border: 1px solid #d1d5da;
+`;
+
+export const Empty = styled.div`
+  display: flex;
+  color: #585858;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  h3 {
+    font-size: 20px;
+    margin-bottom: 0px;
+  }
 `;
