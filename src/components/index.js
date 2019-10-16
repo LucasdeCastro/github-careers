@@ -164,10 +164,6 @@ export const ApplyButton = styled.button`
   font-weight: 500;
   font-size: 15px;
 
-  @media only screen and (max-width: 900px) {
-    width: 90%;
-    align-self: center;
-  }
 `;
 
 export const ButtonAlt = styled.button`
