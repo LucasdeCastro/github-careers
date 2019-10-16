@@ -45,7 +45,6 @@ const IssueCard = ({
     <Card selected={(selected || {}).id === item.id}>
       <TitleContainer onClick={handleClick(item, repos, click)}>
         <CardTitle>
-
           {titleSplited.length <= 3 ? (
             <>
               {titleSplited[2] && titleSplited[2]}
@@ -59,7 +58,6 @@ const IssueCard = ({
               )}
             </>
           ) : title}
-
           {titleSplited.length === 1 && titleSplited[0]}
         </CardTitle>
       </TitleContainer>

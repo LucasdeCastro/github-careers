@@ -13,6 +13,7 @@ import {
 
 import Issue from './Issue';
 import IssueCard from '../components/IssueCard';
+import EmptyState from '../components/EmptyState';
 
 import {
   FETCH_ISSUES,
@@ -146,7 +147,10 @@ class IssuesList extends Component {
 
           </ScrollContainer>
           <ScrollContainer style={{ width: 800 }}>
-            {selectedItem && <Issue item={selectedItem} history={history} />}
+            {selectedItem && <Issue repos={list} item={selectedItem} history={history} />}
+            {!selectedItem && (
+              <EmptyState />
+            )}
           </ScrollContainer>
         </Row>
       </IssueListContainer>
