@@ -22,10 +22,14 @@ marked.setOptions({
 
 const EMAIL_URL = 'https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1';
 
-const openJobPage = (item, repos) => () => {
+export const getURL = (item, repos) => {
   const baseUrl = window.location.href;
   const repo = repos.filter((repokey) => item.url.includes(repokey));
-  window.open(`${baseUrl}${repo}/${item.number}`, '_blank');
+  return `${baseUrl}${repo}/${item.number}`;
+};
+
+export const openJobPage = (item, repos) => () => {
+  window.open(getURL(item, repos), '_blank');
 };
 
 class Issue extends React.PureComponent {

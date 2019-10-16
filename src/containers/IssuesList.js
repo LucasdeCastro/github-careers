@@ -26,7 +26,7 @@ class IssuesList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { selectedItem: null };
+    this.state = { selectedItem: null, isMobile: document.body.offsetWidth <= 1200 };
   }
 
   componentDidMount() {
@@ -94,7 +94,14 @@ class IssuesList extends Component {
   };
 
   selectItem = (selectedItem) => {
-    this.setState({ selectedItem });
+    const { repos: { list: repos }, history } = this.props;
+    const { isMobile } = this.state;
+    if (isMobile) {
+      const repo = repos.filter((repokey) => selectedItem.url.includes(repokey));
+      history.push(`${repo}/${selectedItem.number}`);
+    } else {
+      this.setState({ selectedItem });
+    }
   }
 
   renderList() {
@@ -116,7 +123,7 @@ class IssuesList extends Component {
       issues: { loading, error },
       history,
     } = this.props;
-    const { selectedItem } = this.state;
+    const { selectedItem, isMobile } = this.state;
     if (error) {
       return (
         <Message>
@@ -141,17 +148,19 @@ class IssuesList extends Component {
           ))}
         </TabContainer>
         <Row>
-          <ScrollContainer style={{ width: 400 }}>
+          <ScrollContainer style={{ width: isMobile ? '100%' : 400 }}>
             {this.renderList()}
             <Loading isLoading={loading} />
 
           </ScrollContainer>
-          <ScrollContainer style={{ width: 800 }}>
-            {selectedItem && <Issue repos={list} item={selectedItem} history={history} />}
-            {!selectedItem && (
-              <EmptyState />
-            )}
-          </ScrollContainer>
+          {!isMobile && (
+            <ScrollContainer style={{ width: 800 }}>
+              {selectedItem && <Issue repos={list} item={selectedItem} history={history} />}
+              {!selectedItem && (
+                <EmptyState />
+              )}
+            </ScrollContainer>
+          )}
         </Row>
       </IssueListContainer>
     );
